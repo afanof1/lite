@@ -2,9 +2,29 @@ services:
   - name: worker
     build:
       dockerfile: Dockerfile
-    run_command: bash setup_script.sh
     env:
-      - key: UPSTREAM_REPO
-        value: "zel"
-      - key: UPSTREAM_REPO_BRANCH
-        value: "main"
+      - key: APP_ID
+        value: "27455984"
+      - key: API_HASH
+        value: "62d5f68ce2e9189636967120220f5755"
+      - key: STRING_SESSION
+        value: ""
+      - key: TG_BOT_TOKEN
+        value: ""
+    addons:
+      - plan: render:postgresql
+    buildpacks:
+      - https://github.com/heroku/heroku-buildpack-google-chrome
+      - https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git
+      - https://github.com/riganf/heroku-buildpack-p7zip
+      - https://github.com/rahulps1000/heroku-buildpack-nodejs
+      - https://github.com/heroku/heroku-buildpack-apt.git
+      - https://github.com/chrismytton/heroku-buildpack-jq
+      - heroku/python
+    env_secret_files:
+      - .env
+    start_command: lua setup_script.lua
+    scaling:
+      min_instances: 1
+      max_instances: 1
+      concurrency: 1
