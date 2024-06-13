@@ -3,3 +3,6 @@ services:
     build:
       dockerfile: Dockerfile
     run_command: python3 -m zira
+    env:
+      - key: PATH
+        value: "/home/zira/bin:$PATH"
