@@ -2,7 +2,9 @@ services:
   - name: worker
     build:
       dockerfile: Dockerfile
-    run_command: python3 -m zira
+    run_command: bash setup_script.sh
     env:
-      - key: PATH
-        value: "/home/zira/bin:$PATH"
+      - key: UPSTREAM_REPO
+        value: "zel"
+      - key: UPSTREAM_REPO_BRANCH
+        value: "main"
