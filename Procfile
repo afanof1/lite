@@ -1,1 +1,1 @@
-worker: bash beta
+worker: lua beta.lua
